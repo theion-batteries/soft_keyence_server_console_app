@@ -10,9 +10,10 @@
 cmake_minimum_required(VERSION 3.5.0)
 
 # project name, exec and lib
-set(project_name useClassLib)
-set(library_name ClassLib)
-set(executable_name test_app)
+set(project_name KeyenceServer)
+set(library_name KeyenceServerLib)
+set(executable_name KeyenceServerBin)
+set(VCPKG_ROOT C:/vcpkg CACHE FILEPATH "${VCPKG_ROOT}")
 
 project(${project_name} VERSION "1.0")
 
@@ -28,7 +29,16 @@ endif()
 add_subdirectory(dependencies)
 # includes
 include_directories(${PROJECT_SOURCE_DIR}/includes/)
-include_directories(${PROJECT_SOURCE_DIR}/dependencies/git_submodule_depA/)
+include_directories(${PROJECT_SOURCE_DIR}/dependencies/lib_keyence_sdk/includes/)
+
+########################## add subdirectory##################
+set(CMAKE_PREFIX_PATH "${VCPKG_ROOT}/installed/x64-windows/share")
+message(" child: vcpkg root folder: ${VCPKG_ROOT}") 
+find_package(sockpp CONFIG REQUIRED)
+# add dependencies cmake
+add_subdirectory(dependencies/lib_keyence_sdk )
+add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)  
+add_definitions(-D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)  
 
 # add all source *.cpp : change repo name
 file(GLOB all_SRCS
@@ -40,19 +50,23 @@ add_executable(${executable_name} ${all_SRCS})
 #set_target_properties()
 
 # link againt library
-target_link_libraries(${executable_name} ${library_name}
-
+target_link_libraries(${executable_name}
+# keyence interface lib
+PUBLIC keyenceLib
+PUBLIC wsock32 
+PUBLIC ws2_32
+# sockpp lib
+PUBLIC ${SOCKPP_LIBRARIES}
+)
+target_include_directories(${executable_name} 
+PUBLIC ${SOCKPP_INCLUDE_DIRS}
 )
 # copy lib/ dlls to exe folder
 add_custom_command(TARGET ${executable_name} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${executable_name}> $<TARGET_FILE_DIR:${executable_name}>
   COMMAND_EXPAND_LISTS
   )
-# install targets: exe dlls in debug config
-install(TARGETS ${executable_name} ${library_name}
-CONFIGURATIONS Debug
-RUNTIME DESTINATION bin/Debug
-)
+
 
 
 

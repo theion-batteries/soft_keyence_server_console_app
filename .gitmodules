@@ -1,3 +1,4 @@
 [submodule "dependencies/lib_keyence_sdk"]
 	path = dependencies/lib_keyence_sdk
 	url = https://github.com/theionSami/lib_keyence_sdk.git
+	branch = dev_win_api
