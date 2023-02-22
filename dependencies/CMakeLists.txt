@@ -1,0 +1,1 @@
+add_subdirectory(git_submodule_depA)

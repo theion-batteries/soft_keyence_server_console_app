@@ -1,0 +1,4 @@
+## config file: default and user defined parameters 
+param1: 50 # after homing: go to center position where cnt dispenser will vibrate
+param2: 10 # frequency for dispensing
+param3: 200 # duration of vibration 100 ms
