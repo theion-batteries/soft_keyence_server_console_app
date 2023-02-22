@@ -36,7 +36,6 @@ set(CMAKE_PREFIX_PATH "${VCPKG_ROOT}/installed/x64-windows/share")
 message(" child: vcpkg root folder: ${VCPKG_ROOT}") 
 find_package(sockpp CONFIG REQUIRED)
 # add dependencies cmake
-add_subdirectory(dependencies/lib_keyence_sdk )
 add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)  
 add_definitions(-D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)  
 

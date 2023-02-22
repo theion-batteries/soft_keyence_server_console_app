@@ -1,1 +1,1 @@
-add_subdirectory(git_submodule_depA)
+add_subdirectory(lib_keyence_sdk)

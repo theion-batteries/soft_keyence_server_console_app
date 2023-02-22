@@ -2,7 +2,8 @@
 
 int main()
 {
-    keyenceServer::run();
+    keyenceServer KS;
+    //KS.run_server();
 
     return 0;
 }
