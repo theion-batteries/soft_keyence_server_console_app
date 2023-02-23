@@ -61,10 +61,10 @@ target_include_directories(${executable_name}
 PUBLIC ${SOCKPP_INCLUDE_DIRS}
 )
 # copy lib/ dlls to exe folder
-add_custom_command(TARGET ${executable_name} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${executable_name}> $<TARGET_FILE_DIR:${executable_name}>
-  COMMAND_EXPAND_LISTS
-  )
+#add_custom_command(TARGET ${executable_name} POST_BUILD
+#  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${executable_name}> $<TARGET_FILE_DIR:${executable_name}>
+#  COMMAND_EXPAND_LISTS
+#  )
 
 
 
